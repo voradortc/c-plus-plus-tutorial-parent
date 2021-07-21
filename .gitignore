@@ -1,6 +1,5 @@
 ### VisualStudioCode ###
 .vscode/
-**/target/
 
 ### Windows ###
 Thumbs.db
@@ -11,3 +10,6 @@ ehthumbs_vista.db
 ### macOS ###
 .DS_Store
 .Trashes
+
+### CMake ###
+build/
