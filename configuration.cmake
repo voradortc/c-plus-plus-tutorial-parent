@@ -1,0 +1,25 @@
+set( CMAKE_CXX_STANDARD 17 )
+set( CMAKE_CXX_STANDARD_REQUIRED True )
+set( CMAKE_SOURCE_ROOT_DIR src/main/c++ )
+
+function( configure_build_dirs base_dir )
+    if( ${CMAKE_BUILD_TYPE} MATCHES Release )
+        set( CMAKE_MODULE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${base_dir}/build/prd )
+    else()
+        set( CMAKE_MODULE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${base_dir}/build/dev )
+    endif()
+    
+    set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_MODULE_BINARY_DIR}/lib PARENT_SCOPE )
+    set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_MODULE_BINARY_DIR}/lib PARENT_SCOPE )
+    set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_MODULE_BINARY_DIR}/bin PARENT_SCOPE )
+endfunction()
+
+function( add_module module_name module_directory )
+    if( ${CMAKE_BUILD_TYPE} MATCHES Release )
+        set( CMAKE_MODULE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${module_directory}/build/prd )
+    else()
+        set( CMAKE_MODULE_BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${module_directory}/build/dev )
+    endif()
+
+    add_subdirectory( ${module_name} ${CMAKE_MODULE_BINARY_DIR} )
+endfunction()
