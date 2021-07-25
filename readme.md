@@ -4,3 +4,5 @@ Small C++ examples that cover most basic functionality of C++17 and prior versio
 
 Uses:
 * _[C++](https://isocpp.org/)_
+* _[Conan](https://conan.io)_
+* _[CMake](https://cmake.org/)_

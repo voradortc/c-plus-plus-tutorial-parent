@@ -2,12 +2,12 @@ ENV=$1
 BASEDIR=$(dirname $0)
 
 if [ 'dev' = $ENV ]; then
-    cmake -S "${BASEDIR}" -B "${BASEDIR}/build/dev" -DCMAKE_BUILD_TYPE=Debug && cmake --build "${BASEDIR}/build/dev"
+    conan install "${BASEDIR}" -s build_type=Debug -if "${BASEDIR}/build/dev" && conan build "${BASEDIR}" -bf "${BASEDIR}/build/dev"
     exit
 fi
 
 if [ 'prd' = $ENV ]; then
-    cmake -S "${BASEDIR}" -B "${BASEDIR}/build/prd" -DCMAKE_BUILD_TYPE=Release && cmake --build "${BASEDIR}/build/prd"
+    conan install "${BASEDIR}" -s build_type=Release -if "${BASEDIR}/build/prd" && conan build "${BASEDIR}" -bf "${BASEDIR}/build/prd"
     exit
 fi
 
