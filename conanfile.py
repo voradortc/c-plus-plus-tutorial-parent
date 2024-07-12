@@ -1,22 +1,23 @@
-from conans import ConanFile, CMake, tools
+from conan import ConanFile
+from conan.tools.cmake import CMake
 
 class CPLusPlusConan(ConanFile):
-    name = "C++"
+    name = "c++"
     version = "1.0"
     license = "ISC"
     author = "Victor Ortiz"
-    topics = ("C++", "CMake", "Conan")
+    topics = ( "C++", "CMake", "Conan" )
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = {"shared": False, "fPIC": True}
-    generators = "cmake"
-    requires = "poco/1.9.4"
+    options = { "shared": [True, False], "fPIC": [True, False] }
+    default_options = { "shared": False, "fPIC": True }
+    generators = "CMakeDeps", "CMakeToolchain"
+    requires = "poco/1.13.2"
 
-    def config_options(self):
+    def config_options( self ):
         if self.settings.os == "Windows":
-            del self.options.fPIC
+            self.options.rm_safe( "fPIC" )
 
-    def build(self):
+    def build( self ):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
