@@ -13,3 +13,6 @@ ehthumbs_vista.db
 
 ### CMake ###
 build/
+
+### Python ###
+.venv
